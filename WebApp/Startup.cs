@@ -1,9 +1,9 @@
 
-using Commander.Data;
+using WebApp.Data;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.EntityFrameworkCore;
-using WebApp.Data;
 using System.Data.SqlClient;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace WebApp
 {
@@ -18,12 +18,8 @@ namespace WebApp
 
         public void ConfigureServices(IServiceCollection services)
         {
-
-            var builder = new SqlConnectionStringBuilder(
-            Configuration.GetConnectionString("CommanderConnection"));
-            builder.Password = Configuration["DbPassword"];
-            services.AddDbContext<CommanderContext>(opt => opt.UseSqlServer
-            (builder.ConnectionString));
+            // services.AddEntityFrameworkSqlServer().AddDbContext<DbContext, CommanderContext>(opt => opt.UseSqlServer
+            //     (Configuration.GetConnectionString("CommanderConnection")));
             services.AddControllers();
             services.AddScoped<ICommanderRepo, MockCommanderRepo>();
         }
